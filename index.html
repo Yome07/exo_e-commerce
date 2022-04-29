@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+              </li>
+            </ul>
+          </div>
+          <form class="d-flex">
+            <button id="affichePanier" class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#monPanier" >
+              Mon panier
+            </button>
+          </form>
+        </div>
+      </nav>
+      <!-- affichage du panier -->
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="monPanier">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title">Mon panier</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <p>Voisi la liste de vos produits. Vous pouvez augmenter la quantité si vous les souhaitez.</p>
+          <div class="d-flex justify-content-between align-items-start">
+            <h3>Total : <span></span>&nbsp;€</h3>
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#maCommande" >Valider ma commande</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- affichage du formulaire de commande -->
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="maCommande">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title">Valider ma commande</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <p>Veuillez rentrer vos informations dans les champs de saisi ci-dessous.</p>
+          <form>
+            <div class="mb-3">
+              <label for="nom" class="form-label">Nom</label>
+              <input type="text" class="form-control" id="nom">
+              <p id="nomInvalide" class="d-none invalidStyle">Caratères autorisés : majuscules, minuscules, ', -</p>
+              <p id="nomVide" class="d-none invalidStyle">Champ obligatoire</p>
+            </div>
+            <div class="mb-3">
+              <label for="prenom" class="form-label">Prénom</label>
+              <input type="text" class="form-control" id="prenom">
+              <p id="prenomInvalide" class="d-none invalidStyle">Caratères autorisés : majuscules, minuscules, ', -</p>
+              <p id="prenomVide" class="d-none invalidStyle">Champ obligatoire</p>
+
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Adresse Email</label>
+              <input type="email" class="form-control" id="email">
+              <p id="emailInvalide" class="d-none invalidStyle">Entrez une adresse email valide</p>
+              <p id="emailValide" class="d-none validStyle">Email valide</p>
+              <p id="emailVide" class="d-none invalidStyle">Champ obligatoire</p>
+
+            </div>
+            <div class="mb-3">
+              <label for="telephone" class="form-label">N° de téléphone</label>
+              <input type="telephone" class="form-control" id="telephone">
+              <p id="telephoneInvalide" class="d-none invalidStyle">Entrez un numéro de téléphone valide</p>
+              <p id="telephoneValide" class="d-none validStyle">Numéro de téléphone valide</p>
+              <p id="telephoneVide" class="d-none invalidStyle">Champ obligatoire</p>
+
+            </div>
+            <div class="mb-3">
+              <label for="adresse" class="form-label">Adresse</label>
+              <input type="text" class="form-control" id="adresse">
+              <p id="adresseInvalide" class="d-none invalidStyle">Entrez une adresse valide</p>
+              <p id="adresseValide" class="d-none validStyle">adresse valide</p>
+              <p id="adresseVide" class="d-none invalidStyle">Champ obligatoire</p>
+
+            </div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#valider">Enregistrer</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Affichage validation de la commande -->
+      <div class="modal fade" id="valider" tabindex="-1" >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Valider mes informations et mon panier</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <h3>Vos informations</h3>
+              <div id="mesInformations" class="d-flex flex-wrap justify-content-between"></div>
+              <h3>Votre panier</h3>
+              <div id="monPanierFinal"></div>
+              <div id="totalAPayer" class="alert alert-danger" role="alert">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+              <button type="button" class="btn btn-primary" data-bs-target="#remerciement" data-bs-toggle="modal">Finaliser la commande et payer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- message de remerciement -->
+      <div class="modal fade" id="remerciement" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body">
+              Votre commande a été bien validé, à très bientôt.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- contenu -->
+      <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 g-4"></div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+      <script src="liste_produits.js"></script>
+</body>
+</html>

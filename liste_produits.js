@@ -137,16 +137,20 @@ $(".offcanvas-body button[data-bs-target='#maCommande']").click(function (e) {
 /** Validation du formulaire */
 let champOk = [];
 function verif(id, regex) {
-    let test = regex.test($("#" + id).val());
     if ($("#" + id).val()  === "") {
         $("#" + id + "Vide").removeClass("d-none");
         $("#" + id + "Valide").addClass("d-none");
         $("#" + id + "Invalide").addClass("d-none");
         $("#" + id).addClass("inputInvalid");
+        return false;
 
     } else {
         $("#" + id + "Vide").addClass("d-none");
+        return true;
     }
+}
+function verif(id, regex) {
+    let test = regex.test($("#" + id).val());
     if (!test && $("#" + id).val()  !== "") {
         $("#" + id + "Invalide").removeClass("d-none");
         $("#" + id + "Valide").addClass("d-none");
@@ -162,73 +166,33 @@ function verif(id, regex) {
     }
 }
 /** vérifications des champs */
-let champs = ["nom", "prenom", "email", "telephone", "adresse"]
+let champs = {
+    "nom" : /^[a-zA-Z'\-\ ]+$/,
+    "prenom" : /^[a-zA-Z'\-\ ]+$/,
+    "email" : /^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$/,
+    "telephone" : /^(\d){10}$/,
+    "adresse" : /^[0-9a-zA-Z'\-\ ]+$/
+    };
 $.each(champs, function (index, value) { 
-     $("#" + value).keyup(function() {
-        switch (value) {
-            case "nom" : regex = /^[a-zA-Z'\-\ ]+$/
-                break;
-            case "prenom" : regex = /^[a-zA-Z'\-\ ]+$/
-                break;    
-            case "email": regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$/
-                break;
-            case "telephone": regex = /^(\d){10}$/
-                break;
-            case "adresse": regex = /^[0-9a-zA-Z'\-\ ]+$/
-                break;
-            default: 
-                break;
-        }
-        verif(value, regex);
+    $("#" + index).keyup(function() {
+        verif(index, value);
     });
 });
-
-// /* vérification nom */
-// $("#nom").keyup(function () {
-//     let regexnom = /^[a-zA-Z'\-\ ]+$/
-//     verif("nom", regexnom);
-// });
-
-
-// /* vérification prénom */
-// $("#prenom").keyup(function () {
-//     let regexprenom = /^[a-zA-Z'\-\ ]+$/
-//     verif("prenom", regexprenom);
-// });
-
-// /* vérification email */
-// $("#email").keyup(function () {
-//     let regexemail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$/;
-//     verif("email", regexemail);
-// });
-
-// /* vérification téléphone numéro français */
-// $("#telephone").keyup(function() {
-//     let regextelephone = /^(\d){10}$/;
-//     verif("telephone", regextelephone);
-// });
-
-// /* vérification adresse */
-// $("#adresse").keyup(function () {
-//     let regexadresse = /^[0-9a-zA-Z'\-\ ]+$/
-//     verif("adresse", regexadresse);
-// });
 
 /** récupération des informations du formulaire et du panier pour les afficher dans la modal */
 $("#maCommande button").click(function (e) { 
     e.preventDefault();
-    // champOk.push(verif("nom", regexnom));
-    // champOk.push(verif("prenom", regexprenom));
-    // champOk.push(verif("email", regexemail));
-    // champOk.push(verif("telephone", regextelephone));
-    // champOk.push(verif("adresse", regexadresse));
+    champOk = [];
+    $.each(champs, function (index, value) { 
+        champOk.push(verif(index, value));
+    });
     let formOk = true;
     $.each(champOk, function (index, value) { 
-         formOk = formOk && value;
+        formOk = formOk && value;
     });
     console.log(champOk);
     console.log(formOk);
-    //if (formOk) {
+    if (formOk) {
         nom = $("#nom").val();
         prenom = $("#prenom").val();
         email = $("#email").val();
@@ -249,9 +213,9 @@ $("#maCommande button").click(function (e) {
             $("#monPanierFinal").append(produit);
         });
         $("#totalAPayer").html("Total à payer : " + total + " €");
-    //}
-    
+    }
 });
+
 
 $("#remerciement button").click(function (e) { 
     //e.preventDefault();

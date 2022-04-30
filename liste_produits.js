@@ -34,14 +34,14 @@ var produit = [
 
 /*** affichage des produits **/
 $.each(produit, function (index, value) { 
-    let card = '<div class="col"><div class="card text-center">';
+    let card = '<div class="card text-center">';
     card += '<img src="' + value.image + '" class="card-img-top">';
     card += '<div class="card-body">';
     card += '<h5 class="card-title">' + value.nom + '</h5>';
     card += '<p class="card-text">' + value.description + '</p>';
     card += '<p class="card-text"><span>' + value.prix + '</span> €</p>';
     card += '<a href="#" class="btn btn-info">ajouter au panier</a>'
-    card += '</div></div></div>';
+    card += '</div></div>';
     $(".row").append(card);
 
 });

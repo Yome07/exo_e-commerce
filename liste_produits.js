@@ -190,8 +190,7 @@ $("#maCommande button").click(function (e) {
     $.each(champOk, function (index, value) { 
         formOk = formOk && value;
     });
-    console.log(champOk);
-    console.log(formOk);
+    $("#monPanierFinal").html("");
     if (formOk) {
         nom = $("#nom").val();
         prenom = $("#prenom").val();

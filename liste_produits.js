@@ -109,18 +109,18 @@ $("#affichePanier").click(function (e) {
             $("#monPanier h3 span").html(total);
         }); 
     });
+
+    /**effacer l'affichage du panier en cliquant n'importe où dans la fenêtre en dehors du offcanvas */
+    $("div.offcanvas-backdrop.fade.show").click(function (e) { 
+        e.preventDefault();
+        $("#monPanier h3 span").empty();
+        $(".offcanvas-end .card").remove();
+        console.log("toto");
+    });
 });
 
 /** effacer l'affichage du panier à la fermeture du offcanvas */
 $(".offcanvas-end .btn-close").click(function (e) { 
-    e.preventDefault();
-    $("#monPanier h3 span").empty();
-    $(".offcanvas-end .card").remove();
-});
-/**effacer l'affichage du panier en cliquant n'importe où dans la fenêtre en dehors du offcanvas
- * NE FONCTIONNE PAS
- */
-$("div.offcanvas-backdrop.fade.show").click(function (e) { 
     e.preventDefault();
     $("#monPanier h3 span").empty();
     $(".offcanvas-end .card").remove();
